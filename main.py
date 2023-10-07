@@ -45,7 +45,3 @@ with sql.connect("btn.db") as con:
 
     print(cur.execute("""SELECT * FROM `users`""").fetchall())
 
-
-    cur.execute("""
-                INSERT INTO `users`(`Романов Иван Всильевич`, `romanov@mail.ru`, `romaniv`, `romanov1234`,`2`)
-""")
