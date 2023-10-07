@@ -1,4 +1,5 @@
 import sqlite3 as sql
+from UsersRole import *
 
 
 # Функция для регистрации пользователя
@@ -9,7 +10,6 @@ def register_user():
     password = input("Введите пароль пользователя: ")
     avatar = input("Введите аватар пользователя: ")
     id_role = input("Введите роль пользователя: ")
-
     try:
         with sql.connect("btn.db") as con:
             cur = con.cursor()
@@ -24,5 +24,11 @@ def register_user():
                             (name_user, email, login, password, avatar, id_role))
                 print("Данные добавлены!")
                 con.commit()
+                if id_role == 1:
+                    admin = Admin(name_user, email, login, password, avatar)
+                elif id_role == 2:
+                    user = User(name_user, email, login, password, avatar)
+                elif id_role == 3:
+                    blocked_user = BlockedUser(name_user, email, login, password, avatar)
     except sql.Error as e:
         print("Ошибка базы данных:", e)
