@@ -1,33 +1,28 @@
-import os
+import sqlite3 as sql
 
-full_name = 'Chelovek Admin Team'
-email = 'admin@reglog.com'
-login = 'admin'
-password = 'admin'
-avatar = ''
-role = 'admin'
 
-if os.path.exists('users'):
-    print("Папка users уже существует!")
-    os.chdir('users')
+# Функция для регистрации пользователя
+def register_user():
+    name_user = input("Введите имя пользователя: ")
+    email = input("Введите email пользователя: ")
+    login = input("Введите логин пользователя: ")
+    password = input("Введите пароль пользователя: ")
+    avatar = input("Введите аватар пользователя: ")
+    id_role = input("Введите роль пользователя: ")
 
-    if os.path.exists('login.txt') and os.path.exists('password.txt'):
-        print("Файлы уже существуют!")
-        with open('login.txt', 'r') as f:
-            lines = f.readlines()
-            for line in lines:
-                if login == line:
-                    print("Логин уже используется!")
-                    break
-            else:  # Этот блок выполняется, если логин не найден в файле
-                with open('login.txt', 'a+') as f:
-                    f.write(login + '\n')
-                with open('password.txt', 'a+') as f:
-                    f.write(f'{login}: {password}\n')
-    else:
-        with open('login.txt', 'w') as f:
-            f.write(login + '\n')
-        with open('password.txt', 'a+') as f:
-            f.write(f'{login}: {password}\n')
-else:
-    os.mkdir('users')
+    try:
+        with sql.connect("btn.db") as con:
+            cur = con.cursor()
+
+            # Проверка наличия логина в базе данных
+            search = cur.execute("SELECT * FROM users WHERE login = ?", (login,))
+            if search.fetchone() is not None:
+                print("Логин уже используется!")
+            else:
+                cur.execute("""INSERT INTO users (name_user, email, login, password, avatar, id_role)
+                                VALUES (?, ?, ?, ?, ?, ?)""",
+                            (name_user, email, login, password, avatar, id_role))
+                print("Данные добавлены!")
+                con.commit()
+    except sql.Error as e:
+        print("Ошибка базы данных:", e)
