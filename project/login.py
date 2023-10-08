@@ -2,7 +2,7 @@ import sqlite3 as sql
 from UsersRole import *
 
 
-# Функция для регистрации пользователя
+# Функция для вход
 
 def login_user():
     login = input("Введите логин пользователя: ")

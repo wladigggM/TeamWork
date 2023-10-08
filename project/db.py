@@ -26,8 +26,8 @@ def create_db():
                     FOREIGN KEY (id_role) REFERENCES roles(id));
                     """)
         # Проверяем наличие ролей в базе данных
-        sercher = cur.execute("""SELECT * FROM roles""")
-        if sercher.fetchone() is None:
+        searcher = cur.execute("""SELECT * FROM roles""")
+        if searcher.fetchone() is None:
             cur.execute("""
                         INSERT INTO roles (role) VALUES 
                         ('Администратор'),

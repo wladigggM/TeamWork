@@ -24,11 +24,5 @@ def register_user():
                             (name_user, email, login, password, avatar, id_role))
                 print("Данные добавлены!")
                 con.commit()
-                if id_role == 1:
-                    admin = Admin(name_user, email, login, password, avatar)
-                elif id_role == 2:
-                    user = User(name_user, email, login, password, avatar)
-                elif id_role == 3:
-                    blocked_user = BlockedUser(name_user, email, login, password, avatar)
     except sql.Error as e:
         print("Ошибка базы данных:", e)
