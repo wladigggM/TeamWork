@@ -3,6 +3,7 @@ from reg import register_user
 from reg import create_admin
 from UsersRole import *
 from login import login_user
+from list_ import *
 
 while True:
     create_db()
@@ -30,7 +31,8 @@ while True:
                     2. Добавить пользователя
                     3. Удалить пользователя
                     4. Изменить пользователя
-                    5. Выход
+                    5. Массовая регистрация 
+                    6. Выход
                     > """)
                     if choice == '1':
                         print(admin.view_user())
@@ -43,6 +45,9 @@ while True:
                     elif choice == '4':
                         admin.update_user()
                     elif choice == '5':
+                        file = "users.txt"
+                        mass_reg(file)
+                    elif choice == '6':
                         role = 0
                         break
         print(role)

@@ -17,8 +17,8 @@ def fun(x):
         b.append(i)  
     return tuple(b)
 
-def mass_reg():
-    with open("users.txt","r", encoding='utf-8') as f:
+def mass_reg(file):
+    with open(file,"r", encoding='utf-8') as f:
             cus_file = f.readlines() 
             users = [] 
     # формируем список с кортежами из файла  users.txt
