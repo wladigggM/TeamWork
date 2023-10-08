@@ -67,8 +67,7 @@ while True:
                         break
         if role == 3:  # Дописать действия для заблокированного пользователя
             while True:
-                with sql.connect("btn.db") as con:
-                    cur = con.cursor()
+                
                     cur.execute("SELECT * FROM users WHERE id_role = 2")
                     blocked_data = cur.fetchone()
                     blocked_user = BlockedUser(blocked_data[1], blocked_data[1], blocked_data[2], blocked_data[3],

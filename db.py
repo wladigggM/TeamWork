@@ -34,9 +34,3 @@ def create_db():
                         ('Пользователь'),
                         ('Заблокированный')
                             """)
-        
-            # Создаем админа
-        # cur.execute("""
-        #             INSERT INTO users(name_user, email, login, password,id_role) VALUES 
-        #             ('Админ','admin@btn.ru','admin','admin1234','1');
-        #                 """)
