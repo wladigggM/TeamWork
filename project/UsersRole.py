@@ -40,12 +40,11 @@ class User:
         password = input("Введите новый пароль пользователя: ")
         avatar = input("Введите новый аватар пользователя: ")
         try:
-            print(self.email)
             with sql.connect("btn.db") as con:
                 cur = con.cursor()
                 cur.execute(
                     f"UPDATE users SET name_user =?, email =?, login =?, password =?, avatar =? WHERE login =?",
-                    (name_user, email, login, password, avatar, self.email))
+                    (name_user, email, login, password, avatar, self.login))
                 con.commit()
                 rows_affected = cur.rowcount  # Получаем количество измененных строк
                 if rows_affected > 0:
@@ -123,14 +122,22 @@ class BlockedUser(User):
 
     # Единственный метод для заблокированного пользователя
     def blocked_access(self):
-        return 'Access blocked!'
+        return '\n! -  -   -   -   -   -   -  -   -   -   -   -   -   -   -   - !\n' \
+               '! -  -   -   -   -   -   Access blocked!    -   -   -   -   - !\n' \
+               '! -  -   -   -   -   -   -  -   -   -   -   -   -   -   -   - !\n'
 
     # Блокировал родительский метод для отображения всех пользователей в базе данных
+
     def view_user(self):
-        return 'Access blocked!'
+        return '\n! -  -   -   -   -   -   -  -   -   -   -   -   -   -   -   - !\n' \
+               '! -  -   -   -   -   -   Access blocked!    -   -   -   -   - !\n' \
+               '! -  -   -   -   -   -   -  -   -   -   -   -   -   -   -   - !\n'
 
     def update_user(self):
-        return 'Access blocked!'
-# тесты
-# test_user = User("test_user", "test_email", "w", "wl", "test_avatar")
-# test_user.update_user()
+        return '\n! -  -   -   -   -   -   -  -   -   -   -   -   -   -   -   - !\n' \
+               '! -  -   -   -   -   -   Access blocked!    -   -   -   -   - !\n' \
+               '! -  -   -   -   -   -   -  -   -   -   -   -   -   -   -   - !\n' \
+
+#   тесты
+# test_user = BlockedUser("test_user", "test_email", "w", "wl", "test_avatar")
+# print(test_user.update_user())

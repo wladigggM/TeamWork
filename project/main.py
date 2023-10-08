@@ -3,6 +3,7 @@ from reg import register_user
 from reg import create_admin
 from UsersRole import *
 from login import login_user
+from time import sleep
 
 while True:
     create_db()
@@ -14,7 +15,6 @@ while True:
     > """)
 
     if choice == '1':
-
         register_user()
     elif choice == '2':
         role = login_user()
@@ -45,14 +45,13 @@ while True:
                     elif choice == '5':
                         role = 0
                         break
-        print(role)
         if role == 2:  # Дописать действия для простого пользователя
             while True:
                 with sql.connect("btn.db") as con:
                     cur = con.cursor()
                     cur.execute("SELECT * FROM users WHERE id_role = 2")
                     user_data = cur.fetchone()
-                    user = User(user_data[1], user_data[1], user_data[2], user_data[3], user_data[4])
+                    user = User(user_data[1], user_data[2], user_data[3], user_data[4], user_data[5])
                     choice = input("""Введите пункт меню:
                     1. Пользователи
                     2. Отредактировать свои данные
@@ -73,16 +72,17 @@ while True:
                     blocked_data = cur.fetchone()
                     blocked_user = BlockedUser(blocked_data[1], blocked_data[1], blocked_data[2], blocked_data[3],
                                                blocked_data[4])
-                    choice = input("""Вы были заблокированны!
-                    Введите пункт меню:
-                        1. Пользователи
-                        2. Отредактировать свои данные
-                        3. Выход
-                        > """)
+                    choice = input("""Введите пункт меню:
+                    1. Пользователи
+                    2. Отредактировать свои данные
+                    3. Выход
+                    > """)
                     if choice == '1':
                         print(blocked_user.view_user())
+                        sleep(1)
                     elif choice == '2':
-                        blocked_user.update_user()
+                        print(blocked_user.update_user())
+                        sleep(1)
                     elif choice == '3':
                         role = 0
                         break
