@@ -1,3 +1,7 @@
+from sqlite3 import *
+import sqlite3 as sql
+
+
 # функция для создания кортежа
 def fun(x):
     x = x.split(',')
@@ -11,10 +15,19 @@ def fun(x):
 
 with open("users.txt","r", encoding='utf-8') as f:
         cus_file = f.readlines() 
-        customers = [] 
+        users = [] 
 # формируем список с кортежами из файла  users.txt
         for line1 in cus_file:
-                customers.append(fun(line1))
-print(customers)
+                users.append(fun(line1))
+print(users)
+
+# создаем БД       
+with sql.connect("btn.db") as con:
+    cur = con.cursor()
+
+    for l in users:
+            cur.execute(f"""
+                        INSERT INTO users(name_user, email, login, password,id_role) VALUES {l};
+                    """)
 
 
