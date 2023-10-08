@@ -1,10 +1,12 @@
 from db import create_db
 from reg import register_user
+from reg import create_admin
 from UsersRole import *
 from login import login_user
 
 while True:
     create_db()
+    create_admin()
     choice = input("""Введите пункт меню:
     1. Регистрация
     2. Вход
@@ -12,6 +14,7 @@ while True:
     > """)
 
     if choice == '1':
+
         register_user()
     elif choice == '2':
         role = login_user()
