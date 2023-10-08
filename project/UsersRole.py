@@ -137,7 +137,15 @@ class BlockedUser(User):
         return '\n! -  -   -   -   -   -   -  -   -   -   -   -   -   -   -   - !\n' \
                '! -  -   -   -   -   -   Access blocked!    -   -   -   -   - !\n' \
                '! -  -   -   -   -   -   -  -   -   -   -   -   -   -   -   - !\n' \
-
-#   тесты
+ \
+            #   тесты
 # test_user = BlockedUser("test_user", "test_email", "w", "wl", "test_avatar")
 # print(test_user.update_user())
+
+
+# открытие картинки и преобразование файла в бинарный формат
+# a = r'C:\Users\wladi\Desktop\УЧЕБА\TeamWork\project\123.png'
+#
+# with open(f'{a}', "rb") as f:
+#     bin_file = f.read()
+# print(bin_file)
