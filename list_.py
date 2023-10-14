@@ -17,7 +17,7 @@ def fun(x):
         b.append(i)
     return tuple(b)
 
-
+# функция массовой регистрации из файла
 def mass_reg(file):
     with open(file, "r", encoding='utf-8') as f:
         cus_file = f.readlines()

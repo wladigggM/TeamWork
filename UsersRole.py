@@ -1,5 +1,5 @@
 import sqlite3 as sql
-from ava import added_avatar
+from defs import added_avatar
 
 
 # Класс для пользователя
@@ -27,7 +27,7 @@ class User:
             try:
                 with sql.connect("btn.db") as con:
                     cur = con.cursor()
-                    cur.execute("SELECT name_user, email, login, password, id_roleFROM users")
+                    cur.execute("SELECT name_user, email, login, password, id_role FROM users")
                     user_data = cur.fetchall()
                     return f"{user_data}"
             except sql.Error as e:

@@ -1,10 +1,5 @@
-from db import create_db
-from reg import register_user
-from reg import create_admin
+from defs import *
 from UsersRole import *
-from login import login_user
-from time import sleep
-from list_ import mass_reg
 
 while True:
     create_db()
