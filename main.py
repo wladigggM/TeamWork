@@ -1,5 +1,6 @@
 from defs import *
 from UsersRole import *
+from time import sleep
 
 while True:
     create_db()
