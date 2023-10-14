@@ -1,4 +1,5 @@
 import sqlite3 as sql
+from ava import added_avatar
 
 
 # Класс для пользователя
@@ -17,7 +18,7 @@ class User:
             try:
                 with sql.connect("btn.db") as con:
                     cur = con.cursor()
-                    cur.execute("SELECT name_user, email, login, avatar, id_role FROM users")
+                    cur.execute("SELECT name_user, email, login, id_role FROM users")
                     user_data = cur.fetchall()
                     return f"{user_data}"
             except sql.Error as e:
@@ -26,7 +27,7 @@ class User:
             try:
                 with sql.connect("btn.db") as con:
                     cur = con.cursor()
-                    cur.execute("SELECT * FROM users")
+                    cur.execute("SELECT name_user, email, login, password, id_roleFROM users")
                     user_data = cur.fetchall()
                     return f"{user_data}"
             except sql.Error as e:
@@ -38,13 +39,13 @@ class User:
         email = input("Введите новый email пользователя: ")
         login = input("Введите новый логин пользователя: ")
         password = input("Введите новый пароль пользователя: ")
-        avatar = input("Введите новый аватар пользователя: ")
+        avatar = input("Введите путь до аватарки: ")
         try:
             with sql.connect("btn.db") as con:
                 cur = con.cursor()
                 cur.execute(
                     f"UPDATE users SET name_user =?, email =?, login =?, password =?, avatar =? WHERE login =?",
-                    (name_user, email, login, password, avatar, self.login))
+                    (name_user, email, login, password, added_avatar(avatar), self.login))
                 con.commit()
                 rows_affected = cur.rowcount  # Получаем количество измененных строк
                 if rows_affected > 0:
@@ -75,7 +76,7 @@ class Admin(User):
                 else:
                     cur.execute("""INSERT INTO users (name_user, email, login, password, avatar, id_role)
                                     VALUES (?,?,?,?,?,?)""",
-                                (name_user, email, login, password, avatar, id_role))
+                                (name_user, email, login, password, added_avatar(avatar), id_role))
                     print("Данные добавлены!")
         except sql.Error as e:
             print("Ошибка базы данных:", e)
@@ -97,14 +98,14 @@ class Admin(User):
         email = input("Введите новый email пользователя: ")
         login = input("Введите новый логин пользователя: ")
         password = input("Введите новый пароль пользователя: ")
-        avatar = input("Введите новый аватар пользователя: ")
+        avatar = input("Введите путь до аватарки: ")
         id_role = input("Введите новую роль пользователя: ")
         try:
             with sql.connect("btn.db") as con:
                 cur = con.cursor()
                 cur.execute(
                     "UPDATE users SET name_user =?, email =?, login =?, password =?, avatar =?, id_role=? WHERE id =?",
-                    (name_user, email, login, password, avatar, id_role, id_search))
+                    (name_user, email, login, password, added_avatar(avatar), id_role, id_search))
                 print("Данные обновлены!")
         except sql.Error as e:
             print("Ошибка базы данных:", e)
@@ -141,11 +142,3 @@ class BlockedUser(User):
             #   тесты
 # test_user = BlockedUser("test_user", "test_email", "w", "wl", "test_avatar")
 # print(test_user.update_user())
-
-
-# открытие картинки и преобразование файла в бинарный формат
-# a = r'C:\Users\wladi\Desktop\УЧЕБА\TeamWork\project\123.png'
-#
-# with open(f'{a}', "rb") as f:
-#     bin_file = f.read()
-# print(bin_file)

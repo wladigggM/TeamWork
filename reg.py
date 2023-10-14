@@ -24,7 +24,7 @@ def register_user():
     email = input("Введите email пользователя: ")
     login = input("Введите логин пользователя: ")
     password = input("Введите пароль пользователя: ")
-    avatar = input("Введите аватар пользователя: ")
+    avatar = input("Введите путь до аватарки: ")
     id_role = 2
     try:
         with sql.connect("btn.db") as con:
@@ -37,7 +37,7 @@ def register_user():
             else:
                 cur.execute("""INSERT INTO users (name_user, email, login, password, avatar, id_role)
                                 VALUES (?, ?, ?, ?, ?, ?)""",
-                            (name_user, email, login, password, avatar, id_role))
+                            (name_user, email, login, password, added_avatar(avatar), id_role))
                 print("Данные добавлены!")
                 con.commit()
     except sql.Error as e:

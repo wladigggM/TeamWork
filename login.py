@@ -27,5 +27,3 @@ def login_user():
                     print("\nПароль не совпадает!\n")
     except sql.Error as e:
         print("\nОшибка базы данных:\n", e)
-
-
